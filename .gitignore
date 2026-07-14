@@ -1,0 +1,31 @@
+.DS_Store
+Thumbs.db
+
+# Local secrets and session exports
+.env
+.env.*
+*.session.json
+session*.json
+sessions*.json
+token*.json
+tokens*.json
+auth*.json
+credentials*.json
+xai-*.json
+
+# Dependencies / build caches
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Editor / agent local
+.claude/
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+desktop.ini
