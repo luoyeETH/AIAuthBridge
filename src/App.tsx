@@ -256,9 +256,14 @@ export function App() {
     if (!outputText) {
       return;
     }
-    const first = previewRows[0];
-    const base = sanitizeFileToken(first?.email || first?.name || `${category}-${format}`);
-    const fileName = `${base}.${category}.${format}.${getTimestampToken()}.json`;
+    const stamp = getTimestampToken();
+    // 类型：codex / sub2api / grok-cpa 等（Grok 的 CPA 加 grok- 前缀以区分）
+    const typeToken = category === "grok" && format === "cpa" ? "grok-cpa" : format;
+    // 单账号：账号前缀 + 类型 + 时间；多账号：时间 + 类型
+    const fileName =
+      previewRows.length === 1
+        ? `${sanitizeFileToken(previewRows[0]?.email || previewRows[0]?.name || typeToken)}.${typeToken}.${stamp}.json`
+        : `${stamp}.${typeToken}.json`;
     const blob = new Blob([outputText], { type: "application/json;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
